@@ -147,16 +147,28 @@ class BookShelves extends Component {
   notAnythingToShow = () => {
     const {nothingToShow} = this.state
     return (
-      <div className="nothing-to-show-container">
-        <img
-          src="https://res.cloudinary.com/dq8h4f4kb/image/upload/v1643955328/MiniProject/Groupnot_found_results_v8jur8.svg"
-          alt="no books"
-          className="nothing-too-show-pic"
-        />
-        <p className="nothing-to-show-container-content">
-          Your search for {nothingToShow} did not find any matches.
-        </p>
-      </div>
+      <>
+        <div className="nothing-to-show-container">
+          <img
+            src="https://res.cloudinary.com/dq8h4f4kb/image/upload/v1643955328/MiniProject/Groupnot_found_results_v8jur8.svg"
+            alt="no books"
+            className="nothing-too-show-pic"
+          />
+          <p className="nothing-to-show-container-content">
+            Your search for {nothingToShow} did not find any matches.
+          </p>
+        </div>
+        <div className="nothing-to-show-container-small">
+          <img
+            src="https://res.cloudinary.com/dq8h4f4kb/image/upload/v1643955328/MiniProject/Groupnot_found_results_v8jur8.svg"
+            alt="no books"
+            className="nothing-too-show-pic-small"
+          />
+          <p className="nothing-to-show-container-content-small">
+            Your search for {nothingToShow} did not find any matches.
+          </p>
+        </div>
+      </>
     )
   }
 

@@ -88,6 +88,13 @@ class Home extends Component {
       slidesToShow: 2,
       slidesToScroll: 1,
     }
+    const settingsFour = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    }
     return (
       <>
         <div className="slider-container">
@@ -106,6 +113,13 @@ class Home extends Component {
         </div>
         <div className="slider-container-small">
           <Slider {...settingsThree}>
+            {slickDataArray.map(slickData => (
+              <SlickItem slickDataItem={slickData} key={slickData.id} />
+            ))}
+          </Slider>
+        </div>
+        <div className="slider-container-small-mobile">
+          <Slider {...settingsFour}>
             {slickDataArray.map(slickData => (
               <SlickItem slickDataItem={slickData} key={slickData.id} />
             ))}

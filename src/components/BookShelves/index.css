@@ -125,6 +125,42 @@ border: none;
     height: 500px;
     align-items: center;
 }
+@media screen and (max-width:630px) {
+    .nothing-to-show-container{
+        display: none;
+    }
+}
+.nothing-to-show-container-small{
+    display: none;
+}
+@media screen and (max-width:630px) {
+    .nothing-to-show-container-small{
+        display: none;
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 500px;
+    align-items: center;
+    }
+}
+.nothing-too-show-pic-small{
+    height: 176.01654052734375px;
+width: 257.0172424316406px;
+border-radius: 0px;
+
+}
+.nothing-to-show-container-content-small{
+    font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: 0em;
+text-align: center;
+color: #475569;
+}
+
 .failure-view-all-books-view{
 display: flex;
 flex-direction: column;
