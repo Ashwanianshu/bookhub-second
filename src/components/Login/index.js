@@ -131,30 +131,6 @@ class Login extends Component {
             {showSubmitError && <p className="error-msg">{errorMsg}</p>}
           </form>
         </div>
-        <div className="login-page-form-container-small">
-          <form
-            className="login-form-container-small"
-            onSubmit={this.onSubmitForm}
-          >
-            <div className="login-form-logo-container">
-              <img
-                src="https://res.cloudinary.com/dq8h4f4kb/image/upload/v1643955306/MiniProject/Group_7731book_hub_logo_dzbf3w.png"
-                alt="login website logo"
-                className="login-page-bookhub-logo"
-              />
-            </div>
-            <div className="login-page-input-container">
-              {this.renderUsernameField()}
-            </div>
-            <div className="login-page-input-container">
-              {this.renderPasswordField()}
-            </div>
-            <button type="submit" className="login-form-login-button">
-              Login
-            </button>
-            {showSubmitError && <p className="error-msg">{errorMsg}</p>}
-          </form>
-        </div>
       </div>
     )
   }

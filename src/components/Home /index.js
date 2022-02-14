@@ -67,44 +67,67 @@ class Home extends Component {
 
   homeBoxSlickSlider = () => {
     const {slickDataArray} = this.state
-    const settingsOne = {
+    const settings = {
       dots: false,
       infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 1,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          },
+        },
+      ],
     }
-    const settingsTwo = {
-      dots: false,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-    }
-    const settingsThree = {
-      dots: false,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-    }
-    const settingsFour = {
-      dots: false,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    }
+    // const settingsTwo = {
+    //   dots: false,
+    //   infinite: false,
+    //   speed: 500,
+    //   slidesToShow: 3,
+    //   slidesToScroll: 1,
+    // }
+    // const settingsThree = {
+    //   dots: false,
+    //   infinite: false,
+    //   speed: 500,
+    //   slidesToShow: 2,
+    //   slidesToScroll: 1,
+    // }
+    // const settingsFour = {
+    //   dots: false,
+    //   infinite: false,
+    //   speed: 500,
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1,
+    // }
     return (
       <>
         <div className="slider-container">
-          <Slider {...settingsOne}>
+          <Slider {...settings}>
             {slickDataArray.map(slickData => (
               <SlickItem slickDataItem={slickData} key={slickData.id} />
             ))}
           </Slider>
         </div>
-        <div className="slider-container-mid">
+        {/* <div className="slider-container-mid">
           <Slider {...settingsTwo}>
             {slickDataArray.map(slickData => (
               <SlickItem slickDataItem={slickData} key={slickData.id} />
@@ -124,7 +147,7 @@ class Home extends Component {
               <SlickItem slickDataItem={slickData} key={slickData.id} />
             ))}
           </Slider>
-        </div>
+        </div> */}
       </>
     )
   }
@@ -150,6 +173,13 @@ class Home extends Component {
                 have enjoyed in the past, and we will give you surprisingly
                 insightful recommendations.
               </p>
+              <button
+                onClick={moveToShelf}
+                className="home-slick-container-button-small"
+                type="button"
+              >
+                Find Books
+              </button>
               <div className="home-slick-container">
                 <div className="home-slick-top-container">
                   <h1 className="home-slick-top-container-heading">
@@ -162,32 +192,6 @@ class Home extends Component {
                   >
                     Find Books
                   </button>
-                </div>
-                {this.renderSlick()}
-              </div>
-              <Footer />
-            </div>
-            <div className="home-container-main-small">
-              <h1 className="home-container-heading-small">
-                Find Your Next Favorite Books?
-              </h1>
-              <p className="home-container-content-small">
-                You are in the right place. Tell us what titles or genres you
-                have enjoyed in the past, and we will give you surprisingly
-                insightful recommendations.
-              </p>
-              <button
-                onClick={moveToShelf}
-                className="home-slick-container-button-small"
-                type="button"
-              >
-                Find Books
-              </button>
-              <div className="home-slick-container-small">
-                <div className="home-slick-top-container">
-                  <h1 className="home-slick-top-container-heading-small">
-                    Top Rated Books
-                  </h1>
                 </div>
                 {this.renderSlick()}
               </div>

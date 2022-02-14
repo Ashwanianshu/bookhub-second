@@ -114,50 +114,6 @@ class BookDetails extends Component {
           </div>
           <Footer />
         </div>
-        <div className="book-details-container-small">
-          <div className="book-details-sub-container-small">
-            <div className="book-details-preface-container">
-              <div className="book-details-preface-small">
-                <img
-                  src={coverPic}
-                  alt={title}
-                  className="book-details-cover-pic-small"
-                />
-                <div className="book-details-preface-content-small">
-                  <p className="book-details-preface-content-title-small">
-                    {title}
-                  </p>
-                  <p className="book-details-preface-content-authorname-small">
-                    {authorName}
-                  </p>
-                  <div className="booksitem-container-rating">
-                    <p className="avg-rating-heading-detailed-small">
-                      Avg Rating
-                    </p>
-                    <BsFillStarFill className="booksitem-container-rating-icon-small" />
-                    <p className="booksitem-container-rating-mainrating-small">
-                      {rating}
-                    </p>
-                  </div>
-                  <div className="li-status-container">
-                    <p className="detailed-status-heading-small">Status:</p>
-                    <p className="detailed-real-status-heading-small">
-                      {readStatus}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <hr className="book-details-hr" />
-            <div className="about-container">
-              <h1 className="about-container-heading-small">About Author</h1>
-              <p className="about-container-content-small">{aboutAuthor}</p>
-              <h1 className="about-container-heading-small">About Book</h1>
-              <p className="about-container-content-small">{aboutBook}</p>
-            </div>
-          </div>
-          <Footer />
-        </div>
       </>
     )
   }

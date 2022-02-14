@@ -44,7 +44,10 @@ flex-grow: 1;
 }
 @media screen and (max-width:992px){
     .login-page-form-container{
-        display:none;;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         }
 }
 .login-form-container{
@@ -62,6 +65,23 @@ flex-grow: 1;
     flex-direction: column;
     align-items: center;
 
+}
+@media screen and (max-width:992px){
+    .login-form-container{
+        max-height: 524px;
+        width: 100%;
+        max-width: 350px;
+        top: 270px;
+        box-shadow: none;
+        border-radius: 0px;
+        padding: 64px 48px 64px 48px;
+        background-color: white;
+        border-radius: 10px;
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 .login-page-bookhub-logo{
     height: 47.99907684326172px;
@@ -130,31 +150,4 @@ background-color: #0284C7;
     font-size: 12px;
     line-height: 16px;
     color: #ff0b37;
-}
-.login-page-form-container-small{
-    display: none;
-}
-@media screen and (max-width:992px) {
-    .login-page-form-container-small{
-        display: block;
-        display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-    }
-}
-.login-form-container-small{
-    max-height: 524px;
-    width: 100%;
-    max-width: 350px;
-    top: 270px;
-    border-radius: 0px;
-    padding: 64px 48px 64px 48px;
-    background-color: white;
-    border-radius: 10px;
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
 }

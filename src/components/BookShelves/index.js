@@ -115,25 +115,6 @@ class BookShelves extends Component {
     )
   }
 
-  BookShelvesMenuSmall = () => {
-    const {currentReadingList} = this.state
-    return (
-      <div className="bookshelves-menu-container-small">
-        <h1 className="bookshelves-menu-containe-heading">Bookshelves</h1>
-        <ul className="bookshelves-menu-ul-small">
-          {bookshelvesList.map(selectedValue => (
-            <BookMenu
-              key={selectedValue.id}
-              activeReadingList={currentReadingList === selectedValue.value}
-              changeSelectedValue={this.changeSelectedValue}
-              selectedValue={selectedValue}
-            />
-          ))}
-        </ul>
-      </div>
-    )
-  }
-
   inputChange = event => {
     this.setState({searchInput: event.target.value})
   }
@@ -155,16 +136,6 @@ class BookShelves extends Component {
             className="nothing-too-show-pic"
           />
           <p className="nothing-to-show-container-content">
-            Your search for {nothingToShow} did not find any matches.
-          </p>
-        </div>
-        <div className="nothing-to-show-container-small">
-          <img
-            src="https://res.cloudinary.com/dq8h4f4kb/image/upload/v1643955328/MiniProject/Groupnot_found_results_v8jur8.svg"
-            alt="no books"
-            className="nothing-too-show-pic-small"
-          />
-          <p className="nothing-to-show-container-content-small">
             Your search for {nothingToShow} did not find any matches.
           </p>
         </div>
@@ -239,6 +210,23 @@ class BookShelves extends Component {
         <Navbar />
         <div className="bookshelves-parent-container">
           <div className="bookshelves-bg-container">
+            <div className="search-container-small">
+              <input
+                type="search"
+                className="search-container-real"
+                placeholder="Search"
+                onChange={this.inputChange}
+                value={searchInput}
+              />
+              <button
+                testid="searchButton"
+                type="button"
+                className="search-button"
+                onClick={this.clickingInput}
+              >
+                <BsSearch />
+              </button>
+            </div>
             {this.BookShelvesMenu()}
             <div className="bookshelves-main-container">
               <div className="bookshelves-main-container-search-contaiener">
@@ -264,33 +252,6 @@ class BookShelves extends Component {
                   </button>
                 </div>
               </div>
-              <ul className="render-all-books-ul">{this.renderAllBooks()}</ul>
-            </div>
-          </div>
-          <Footer />
-        </div>
-        <div className="bookshelves-parent-container-small">
-          <div className="bookshelves-bg-container-small">
-            <div className="search-container-small">
-              <input
-                type="search"
-                className="search-container-real"
-                placeholder="Search"
-                onChange={this.inputChange}
-                value={searchInput}
-              />
-              <button
-                type="button"
-                className="search-button"
-                data-testid="searchButton"
-                onClick={this.clickingInput}
-                testid="searchButton"
-              >
-                <BsSearch />
-              </button>
-            </div>
-            {this.BookShelvesMenuSmall()}
-            <div className="bookshelves-main-container-main">
               <ul className="render-all-books-ul">{this.renderAllBooks()}</ul>
             </div>
           </div>
