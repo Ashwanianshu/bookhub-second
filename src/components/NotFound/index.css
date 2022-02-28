@@ -16,6 +16,8 @@
 }
 .not-found-container-small-pic{
   width: 80%;
+  height: 400px;
+  width: 600px;
 }
 @media screen and (max-width: 768px){
   .not-found-container-small-pic {

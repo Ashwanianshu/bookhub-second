@@ -86,7 +86,9 @@ class BookDetails extends Component {
                   className="book-details-cover-pic"
                 />
                 <div className="book-details-preface-content">
-                  <p className="book-details-preface-content-title">{title}</p>
+                  <h1 className="book-details-preface-content-title">
+                    {title}
+                  </h1>
                   <p className="book-details-preface-content-authorname">
                     {authorName}
                   </p>
