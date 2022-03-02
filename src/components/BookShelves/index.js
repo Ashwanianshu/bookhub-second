@@ -199,8 +199,32 @@ class BookShelves extends Component {
     this.getBooksapi()
   }
 
+  renderSearchContainer = () => {
+    const {searchInput} = this.state
+    return (
+      <div className="search-container">
+        <input
+          type="search"
+          className="search-container-real"
+          placeholder="Search"
+          onChange={this.inputChange}
+          value={searchInput}
+        />
+        <button
+          type="button"
+          className="search-button"
+          data-testid="searchButton"
+          onClick={this.clickingInput}
+          testid="searchButton"
+        >
+          <BsSearch />
+        </button>
+      </div>
+    )
+  }
+
   renderHomePage = () => {
-    const {searchInput, currentReadingList} = this.state
+    const {currentReadingList} = this.state
     const filteredSuggestion = bookshelvesList.filter(
       everySuggestion => everySuggestion.value === currentReadingList,
     )[0].label
@@ -211,46 +235,16 @@ class BookShelves extends Component {
         <div className="bookshelves-parent-container">
           <div className="bookshelves-bg-container">
             <div className="search-container-small">
-              <input
-                type="search"
-                className="search-container-real"
-                placeholder="Search"
-                onChange={this.inputChange}
-                value={searchInput}
-              />
-              <button
-                testid="searchButton"
-                type="button"
-                className="search-button"
-                onClick={this.clickingInput}
-              >
-                <BsSearch />
-              </button>
+              {this.renderSearchContainer()}
             </div>
+
             {this.BookShelvesMenu()}
             <div className="bookshelves-main-container">
               <div className="bookshelves-main-container-search-contaiener">
-                <p className="bookshelves-main-container-search-contaiener-heading">
+                <h1 className="bookshelves-main-container-search-contaiener-heading">
                   {filteredSuggestion} Books
-                </p>
-                <div className="search-container">
-                  <input
-                    type="search"
-                    className="search-container-real"
-                    placeholder="Search"
-                    onChange={this.inputChange}
-                    value={searchInput}
-                  />
-                  <button
-                    type="button"
-                    className="search-button"
-                    data-testid="searchButton"
-                    onClick={this.clickingInput}
-                    testid="searchButton"
-                  >
-                    <BsSearch />
-                  </button>
-                </div>
+                </h1>
+                {this.renderSearchContainer()}
               </div>
               <ul className="render-all-books-ul">{this.renderAllBooks()}</ul>
             </div>
