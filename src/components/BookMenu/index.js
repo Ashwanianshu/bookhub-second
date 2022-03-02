@@ -8,17 +8,15 @@ const BookMenu = props => {
     changeSelectedValue(value)
   }
   return (
-    <>
-      <li className="bookmenu-li">
-        <button
-          className={`change-selected-value-button ${extraActiveClass} `}
-          onClick={changeSelectedValueBookMenu}
-          type="button"
-        >
-          {label}
-        </button>
-      </li>
-    </>
+    <li className="bookmenu-li">
+      <button
+        className={`change-selected-value-button ${extraActiveClass} `}
+        onClick={changeSelectedValueBookMenu}
+        type="button"
+      >
+        {label}
+      </button>
+    </li>
   )
 }
 export default BookMenu
