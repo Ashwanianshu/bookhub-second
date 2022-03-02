@@ -111,11 +111,11 @@ text-align: left;
     width: 100%;
     justify-content: space-between;
 }
-@media screen and (max-width:955px){
+/* @media screen and (max-width:955px){
     .bookshelves-main-container-search-contaiener{
         display: none;
     }
-}
+} */
 .search-container{
     align-self: center;
     margin-right: 150px;

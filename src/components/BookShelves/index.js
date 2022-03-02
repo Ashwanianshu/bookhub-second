@@ -199,6 +199,12 @@ class BookShelves extends Component {
     this.getBooksapi()
   }
 
+  onKeyDown = event => {
+    if (event.key === 'Enter') {
+      this.getBooksapi()
+    }
+  }
+
   renderSearchContainer = () => {
     const {searchInput} = this.state
     return (
@@ -207,15 +213,15 @@ class BookShelves extends Component {
           type="search"
           className="search-container-real"
           placeholder="Search"
+          onKeyDown={this.onKeyDown}
           onChange={this.inputChange}
           value={searchInput}
         />
         <button
           type="button"
           className="search-button"
-          data-testid="searchButton"
-          onClick={this.clickingInput}
           testid="searchButton"
+          onClick={this.clickingInput}
         >
           <BsSearch />
         </button>
@@ -234,9 +240,9 @@ class BookShelves extends Component {
         <Navbar />
         <div className="bookshelves-parent-container">
           <div className="bookshelves-bg-container">
-            <div className="search-container-small">
+            {/* <div className="search-container-small">
               {this.renderSearchContainer()}
-            </div>
+            </div> */}
 
             {this.BookShelvesMenu()}
             <div className="bookshelves-main-container">
