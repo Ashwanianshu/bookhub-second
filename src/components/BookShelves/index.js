@@ -172,7 +172,7 @@ class BookShelves extends Component {
         <button
           className="failure-view-all-books-view-image-button"
           type="button"
-          onClick={failureViewAllBookshelves}
+          onClick={failureViewAllBookshelves()}
         >
           Try Again
         </button>
