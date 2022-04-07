@@ -5,5 +5,7 @@ const BookContext = React.createContext({
   alterActiveRoute: () => {},
   hamburger: false,
   hamburgerDrop: () => {},
+  wishListItem: [],
+  addWishListItem: () => {},
 })
 export default BookContext

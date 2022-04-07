@@ -1,186 +1,172 @@
-import {Component} from 'react'
-
-import {Link, withRouter} from 'react-router-dom'
-import {FaBars} from 'react-icons/fa'
-
-import {AiOutlineClose} from 'react-icons/ai'
-import Cookies from 'js-cookie'
-
 import './index.css'
+import Cookies from 'js-cookie'
+import {Link, withRouter} from 'react-router-dom'
+import {useState} from 'react'
 import BookContext from '../../Context/bookContext'
 
-class Navbar extends Component {
-  state = {
-    isHamburgerDown: false,
-  }
+const Navbar = props => {
+  const [hamburgerdown, setHamburgerDown] = useState(false)
 
-  onClickLogout = () => {
-    const {history} = this.props
-    Cookies.remove('jwt_token')
-    history.replace('/login')
+  const dropTheHamburgerIcon = () => {
+    setHamburgerDown(!hamburgerdown)
   }
-
-  scrollOptions = () => (
+  return (
     <BookContext.Consumer>
       {value => {
         const {alterActiveRoute} = value
         const activeRouteNavbar = localStorage.getItem('activeLink')
         let HomeClass = ''
         let booksClass = ''
+        let wishListClass = ''
         if (activeRouteNavbar === 'home') {
           HomeClass = 'navbar-menu-section-content-blue'
         } else if (activeRouteNavbar === 'bookshelves') {
           booksClass = 'navbar-menu-section-content-blue'
+        } else if (activeRouteNavbar === 'wishlist') {
+          wishListClass = 'navbar-menu-section-content-blue'
         }
+        const hamburgerPic = hamburgerdown
+          ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrnFxTNSLWXGQUhM8efcDmCgJs5qSxcFGoBw&usqp=CAU'
+          : 'https://res.cloudinary.com/dq8h4f4kb/image/upload/v1643817045/MiniProject/iconhamburger_icon_navbar_ysaave.svg'
+
+        const logoutFromHere = () => {
+          const {history} = props
+          Cookies.remove('jwt_token')
+          history.replace('/login')
+        }
+
         const changeToHome = () => {
           alterActiveRoute('home')
         }
         const changeToBooks = () => {
           alterActiveRoute('bookshelves')
         }
-        return (
-          <ul className="options-container">
-            <li className="nav-menu-item">
+        const changeToWishlist = () => {
+          alterActiveRoute('wishlist')
+        }
+        const menuInSmall = () => (
+          <ul className="navbar-menu-section-small">
+            <li className="navbar-menu-section-content-margin">
               <Link
                 onClick={changeToHome}
+                className={`navbar-menu-section-content  ${HomeClass} link-class`}
                 to="/"
-                className={`nav-link ${HomeClass}`}
               >
                 Home
               </Link>
             </li>
-            <li className="nav-menu-item">
+
+            <li className="navbar-menu-section-content-margin">
               <Link
                 to="/shelf"
                 onClick={changeToBooks}
-                className={`nav-link ${booksClass}`}
+                className={`navbar-menu-section-content  ${booksClass} link-class`}
               >
                 Bookshelves
               </Link>
             </li>
+            <li className="navbar-menu-section-content-margin">
+              <Link
+                to="/wishlist"
+                onClick={changeToWishlist}
+                className={`navbar-menu-section-content  ${wishListClass} link-class`}
+              >
+                Wishlist
+              </Link>
+            </li>
+
             <button
-              onClick={this.onClickLogout}
-              className="logout-desktop-button"
+              className="logout-button logout-button-small"
               type="button"
+              onClick={logoutFromHere}
             >
               Logout
             </button>
           </ul>
         )
-      }}
-    </BookContext.Consumer>
-  )
 
-  onClickNavbar = () => {
-    this.setState(prevState => ({
-      isHamburgerDown: !prevState.isHamburgerDown,
-    }))
-  }
-
-  buttonContainer = () => {
-    const {isHamburgerDown} = this.state
-    return !isHamburgerDown ? (
-      <button
-        type="button"
-        className="nav-bars-button"
-        onClick={this.onClickNavbar}
-      >
-        <FaBars className="nav-bars" />
-      </button>
-    ) : (
-      <button
-        type="button"
-        className="close-button"
-        onClick={this.onClickNavbar}
-      >
-        <AiOutlineClose className="close-logo" />
-      </button>
-    )
-  }
-
-  navBarContent = () => (
-    <BookContext.Consumer>
-      {value => {
-        const {alterActiveRoute} = value
-        const {isHamburgerDown} = this.state
-        const activeRouteNavbar = localStorage.getItem('activeLink')
-        let HomeClass = ''
-        let booksClass = ''
-        if (activeRouteNavbar === 'home') {
-          HomeClass = 'navbar-menu-section-content-blue'
-        } else if (activeRouteNavbar === 'bookshelves') {
-          booksClass = 'navbar-menu-section-content-blue'
-        }
-        const changeToHome = () => {
-          alterActiveRoute('home')
-        }
-        const changeToBooks = () => {
-          alterActiveRoute('bookshelves')
-        }
         return (
-          <nav className="nav-header" fixed="true">
-            <div className="nav-content">
-              <div className="navbar-mobile-logo-main-container">
-                <div className="navbar-mobile-logo-container">
-                  <Link to="/">
-                    <img
-                      src="https://res.cloudinary.com/saikrishnaboga-ccbp-tech/image/upload/v1643539861/Book-Hub%20/Group_7731login-B-logo_vneo4x.png"
-                      alt="website logo"
-                      className="website-logo"
-                    />
-                  </Link>
-                  {this.buttonContainer()}
-                </div>
-                <div className="scroll-options-container">
-                  {isHamburgerDown && this.scrollOptions()}
-                </div>
-              </div>
-              <div className="navbar-desktop-container">
-                <Link to="/" className="nav-link">
+          <nav className="navbar-container">
+            <div className="navbar-nav-container-large">
+              <div className="navbar-bookhub-logo-container">
+                <Link to="/" className="link-class logo-align">
                   <img
-                    src="https://res.cloudinary.com/saikrishnaboga-ccbp-tech/image/upload/v1643539861/Book-Hub%20/Group_7731login-B-logo_vneo4x.png"
+                    src="https://res.cloudinary.com/dq8h4f4kb/image/upload/v1643955306/MiniProject/Group_7731book_hub_logo_dzbf3w.png"
                     alt="website logo"
-                    className="website-logo"
+                    className="login-page-bookhub-logo navbar-page-bookhub-logo"
                   />
                 </Link>
-                <ul className="nav-menu">
-                  <li className="nav-menu-item">
-                    <Link
-                      onClick={changeToHome}
-                      to="/"
-                      className={`nav-link ${HomeClass}`}
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-menu-item">
-                    <Link
-                      onClick={changeToBooks}
-                      to="/shelf"
-                      className={`nav-link ${booksClass}`}
-                    >
-                      Bookshelves
-                    </Link>
-                  </li>
-                  <button
-                    className="logout-desktop-button"
-                    onClick={this.onClickLogout}
-                    type="button"
-                  >
-                    Logout
-                  </button>
-                </ul>
               </div>
+              <ul className="navbar-menu-section">
+                <li>
+                  <Link
+                    to="/"
+                    onClick={changeToHome}
+                    className={`navbar-menu-section-content ${HomeClass} link-class`}
+                  >
+                    Home
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    to="/shelf"
+                    onClick={changeToBooks}
+                    className={`navbar-menu-section-content ${booksClass} link-class`}
+                  >
+                    Bookshelves
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/wishlist"
+                    onClick={changeToWishlist}
+                    className={`navbar-menu-section-content ${wishListClass} link-class`}
+                  >
+                    Wishlist
+                  </Link>
+                </li>
+
+                <button
+                  className="logout-button"
+                  type="button"
+                  onClick={logoutFromHere}
+                >
+                  Logout
+                </button>
+              </ul>
+            </div>
+            <div className="navbar-nav-container-small-main">
+              <div className="navbar-nav-container-small">
+                <div className="navbar-bookhub-logo-container-small">
+                  <Link to="/" className="link-class logo-align">
+                    <img
+                      src="https://res.cloudinary.com/dq8h4f4kb/image/upload/v1643955306/MiniProject/Group_7731book_hub_logo_dzbf3w.png"
+                      alt="website logo"
+                      className="login-page-bookhub-logo-small"
+                    />
+                  </Link>
+                </div>
+                <div>
+                  <button
+                    onClick={dropTheHamburgerIcon}
+                    type="button"
+                    className="button-hamburger-navbar"
+                  >
+                    <img
+                      className="hamburger-icon-navbar"
+                      src={hamburgerPic}
+                      alt="hamburger"
+                    />
+                  </button>
+                </div>
+              </div>
+              {hamburgerdown ? menuInSmall() : null}
             </div>
           </nav>
         )
       }}
     </BookContext.Consumer>
   )
-
-  render() {
-    return this.navBarContent()
-  }
 }
-
 export default withRouter(Navbar)

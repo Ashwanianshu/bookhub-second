@@ -212,7 +212,7 @@ text-align: left;
     }
 }
 .detailed-real-status-heading{
-    font-family: Inter;
+font-family: Inter;
 font-size: 20px;
 font-style: normal;
 font-weight: 500;
@@ -232,6 +232,7 @@ color: #0284C7;
     letter-spacing: 0px;
     margin-left: 8px;
     color: #0284C7;
+    cursor: pointer;
     align-content: center;
     }
 }
@@ -339,4 +340,7 @@ color: #475569;
     text-align: left;
     color: #334155;
     
+}
+.select-class-status{
+border: none;
 }

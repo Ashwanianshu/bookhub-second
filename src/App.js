@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import {Component} from 'react'
 import './App.css'
 import {Route, Switch} from 'react-router-dom'
@@ -8,7 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Bookshelves from './components/BookShelves'
 import BookContext from './Context/bookContext'
 import NotFound from './components/NotFound'
-// use the below bookshelvesList for rendering read status of book items in Bookshelves Route
+import Wishlist from './components/Wishlist'
 
 class App extends Component {
   state = {
@@ -43,6 +44,7 @@ class App extends Component {
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/shelf" component={Bookshelves} />
           <ProtectedRoute exact path="/books/:id" component={BookDetails} />
+          <ProtectedRoute exact path="/wishlist" component={Wishlist} />
           <NotFound />
         </Switch>
       </BookContext.Provider>

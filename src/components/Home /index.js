@@ -48,6 +48,7 @@ class Home extends Component {
         id: slickData.id,
         title: slickData.title,
       }))
+      console.log(fetchedData)
       this.setState({
         slickDataArray: [...updatedData],
         apiStatus: apiStatusConstants.success,
@@ -67,67 +68,44 @@ class Home extends Component {
 
   homeBoxSlickSlider = () => {
     const {slickDataArray} = this.state
-    const settings = {
+    const settingsOne = {
       dots: false,
       infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 1,
-          },
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 1,
-          },
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-          },
-        },
-      ],
     }
-    // const settingsTwo = {
-    //   dots: false,
-    //   infinite: false,
-    //   speed: 500,
-    //   slidesToShow: 3,
-    //   slidesToScroll: 1,
-    // }
-    // const settingsThree = {
-    //   dots: false,
-    //   infinite: false,
-    //   speed: 500,
-    //   slidesToShow: 2,
-    //   slidesToScroll: 1,
-    // }
-    // const settingsFour = {
-    //   dots: false,
-    //   infinite: false,
-    //   speed: 500,
-    //   slidesToShow: 1,
-    //   slidesToScroll: 1,
-    // }
+    const settingsTwo = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+    }
+    const settingsThree = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+    }
+    const settingsFour = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    }
     return (
       <>
         <div className="slider-container">
-          <Slider {...settings}>
+          <Slider {...settingsOne}>
             {slickDataArray.map(slickData => (
               <SlickItem slickDataItem={slickData} key={slickData.id} />
             ))}
           </Slider>
         </div>
-        {/* <div className="slider-container-mid">
+        <div className="slider-container-mid">
           <Slider {...settingsTwo}>
             {slickDataArray.map(slickData => (
               <SlickItem slickDataItem={slickData} key={slickData.id} />
@@ -141,13 +119,13 @@ class Home extends Component {
             ))}
           </Slider>
         </div>
-        <div className="slider-container-small-mobile">
+        <div className="slider-container-smallest">
           <Slider {...settingsFour}>
             {slickDataArray.map(slickData => (
               <SlickItem slickDataItem={slickData} key={slickData.id} />
             ))}
           </Slider>
-        </div> */}
+        </div>
       </>
     )
   }

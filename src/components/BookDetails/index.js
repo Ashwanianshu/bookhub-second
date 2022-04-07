@@ -1,6 +1,8 @@
+/* eslint-disable no-restricted-syntax */
 import './index.css'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {AiFillHeart, AiOutlineHeart} from 'react-icons/ai'
 import {BsFillStarFill} from 'react-icons/bs'
 import Loader from 'react-loader-spinner'
 import Navbar from '../Navbar'
@@ -16,6 +18,7 @@ const apiStatusConstants = {
 class BookDetails extends Component {
   state = {
     book: {},
+    booksDataList: {},
     apiStatus: apiStatusConstants.initial,
   }
 
@@ -64,7 +67,8 @@ class BookDetails extends Component {
   }
 
   renderBookDetailedView = () => {
-    const {book} = this.state
+    const {book, booksDataList} = this.state
+    console.log(booksDataList)
     const {
       authorName,
       aboutAuthor,
@@ -73,7 +77,64 @@ class BookDetails extends Component {
       title,
       readStatus,
       rating,
+      id,
     } = book
+    const changeWishlist = () => {
+      const wishListItem = JSON.parse(localStorage.getItem('array'))
+
+      const otherArray = []
+
+      for (const k of wishListItem) {
+        if (k.id === id) {
+          let okObject = {}
+          if (k.isWishlist === false) {
+            okObject = {...k, isWishlist: true}
+          } else {
+            okObject = {...k, isWishlist: false}
+          }
+          otherArray.push(okObject)
+        } else {
+          otherArray.push(k)
+        }
+      }
+      localStorage.setItem('array', JSON.stringify(otherArray))
+      this.setState({
+        booksDataList: [],
+      })
+    }
+
+    const showWishlist = () => {
+      const wishListItem = JSON.parse(localStorage.getItem('array'))
+      let arr = {}
+      for (const i of wishListItem) {
+        if (i.id === book.id) {
+          arr = i
+        }
+      }
+
+      return arr.isWishlist ? (
+        <button
+          onClick={changeWishlist}
+          type="button"
+          className="wishlist-button-bookshelves extra-wishlist-button-bookshelves"
+        >
+          <AiFillHeart className="icon-heart-red" />
+          <p className="wishlist-button-bookshelves-content color-white">
+            WISHLISTED
+          </p>
+        </button>
+      ) : (
+        <button
+          onClick={changeWishlist}
+          type="button"
+          className="wishlist-button-bookshelves"
+        >
+          <AiOutlineHeart className="icon-heart" />
+          <p className="wishlist-button-bookshelves-content">WISHLIST</p>
+        </button>
+      )
+    }
+
     return (
       <>
         <div className="book-details-container">
@@ -103,6 +164,7 @@ class BookDetails extends Component {
                     <p className="detailed-status-heading">Status:</p>
                     <p className="detailed-real-status-heading">{readStatus}</p>
                   </div>
+                  {showWishlist()}
                 </div>
               </div>
             </div>
@@ -168,6 +230,7 @@ class BookDetails extends Component {
 
   render() {
     localStorage.setItem('activeLink', '')
+
     return (
       <>
         <Navbar />

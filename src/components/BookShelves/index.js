@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import './index.css'
 import {Component} from 'react'
 import {BsSearch} from 'react-icons/bs'
@@ -36,7 +37,6 @@ const apiStatusConstants = {
   failure: 'FAILURE',
   inProgress: 'IN_PROGRESS',
 }
-
 class BookShelves extends Component {
   state = {
     currentReadingList: bookshelvesList[0].value,
@@ -73,10 +73,24 @@ class BookShelves extends Component {
         title: booksData.title,
         readStatus: booksData.read_status,
         rating: booksData.rating,
+        isWishlist: false,
       }))
+      console.log(fetchedData)
+      const wishListItem = JSON.parse(localStorage.getItem('array'))
+      let finalData = []
+      if (wishListItem !== null) {
+        const val = wishListItem.length === 0 ? updatedData : wishListItem
+        for (const i of updatedData) {
+          const data = val.filter(j => j.id === i.id)
+          finalData.push(data[0])
+        }
+      } else {
+        finalData = updatedData
+      }
+
       this.setState({
         apiStatus: apiStatusConstants.success,
-        booksDataList: [...updatedData],
+        booksDataList: [...finalData],
         nothingToShow: searchInput,
       })
     } else {
@@ -143,12 +157,47 @@ class BookShelves extends Component {
     )
   }
 
+  changeBooksDataList = id => {
+    const {booksDataList} = this.state
+    const otherArray = []
+
+    for (const k of booksDataList) {
+      if (k.id === id) {
+        let okObject = {}
+        if (k.isWishlist === false) {
+          okObject = {...k, isWishlist: true}
+        } else {
+          okObject = {...k, isWishlist: false}
+        }
+        otherArray.push(okObject)
+      } else {
+        otherArray.push(k)
+      }
+    }
+    this.setState(
+      {
+        booksDataList: [...otherArray],
+      },
+      this.changeLocalStorage,
+    )
+  }
+
+  changeLocalStorage = () => {
+    const {booksDataList} = this.state
+    localStorage.setItem('array', JSON.stringify(booksDataList))
+  }
+
   renderBookshelvesListView = () => {
     const {booksDataList} = this.state
+
     const booksDataListLength = booksDataList.length
     if (booksDataListLength !== 0) {
       return booksDataList.map(everyBook => (
-        <BooksItem everyBook={everyBook} key={everyBook.id} />
+        <BooksItem
+          changeBooksDataList={this.changeBooksDataList}
+          everyBook={everyBook}
+          key={everyBook.id}
+        />
       ))
     }
 
@@ -240,9 +289,9 @@ class BookShelves extends Component {
         <Navbar />
         <div className="bookshelves-parent-container">
           <div className="bookshelves-bg-container">
-            {/* <div className="search-container-small">
+            <div className="search-container-small">
               {this.renderSearchContainer()}
-            </div> */}
+            </div>
 
             {this.BookShelvesMenu()}
             <div className="bookshelves-main-container">
@@ -250,7 +299,9 @@ class BookShelves extends Component {
                 <h1 className="bookshelves-main-container-search-contaiener-heading">
                   {filteredSuggestion} Books
                 </h1>
-                {this.renderSearchContainer()}
+                <div className="search-container-big">
+                  {this.renderSearchContainer()}
+                </div>
               </div>
               <ul className="render-all-books-ul">{this.renderAllBooks()}</ul>
             </div>
