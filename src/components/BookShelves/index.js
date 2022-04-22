@@ -82,7 +82,11 @@ class BookShelves extends Component {
         const val = wishListItem.length === 0 ? updatedData : wishListItem
         for (const i of updatedData) {
           const data = val.filter(j => j.id === i.id)
-          finalData.push(data[0])
+          if (data.length !== 0) {
+            finalData.push(data[0])
+          } else {
+            finalData.push(i)
+          }
         }
       } else {
         finalData = updatedData

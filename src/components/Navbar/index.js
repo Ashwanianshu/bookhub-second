@@ -32,7 +32,6 @@ const Navbar = props => {
         const logoutFromHere = () => {
           const {history} = props
           Cookies.remove('jwt_token')
-          localStorage.removeItem('array')
           history.replace('/login')
         }
 
