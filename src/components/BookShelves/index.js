@@ -75,12 +75,13 @@ class BookShelves extends Component {
         rating: booksData.rating,
         isWishlist: false,
       }))
-      console.log(fetchedData)
+      // console.log(fetchedData)
       const wishListItem = JSON.parse(localStorage.getItem('array'))
       let finalData = []
+
       if (wishListItem !== null) {
         const val = wishListItem.length === 0 ? updatedData : wishListItem
-        for (const i of updatedData) {
+        for (const i of val) {
           const data = val.filter(j => j.id === i.id)
           finalData.push(data[0])
         }
